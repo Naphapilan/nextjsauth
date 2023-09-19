@@ -1,33 +1,26 @@
 import prisma from "@/lib/prisma";
 
-interface RegisterRequestBody {
+interface RequestBody {
   username: string;
+  name: string;
   password: string;
-  // Add any additional registration fields here
 }
 
 export async function POST(req: Request) {
-  const body: RegisterRequestBody = await req.json();
+  const body: RequestBody = await req.json();
 
-  // Check if the user already exists
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      email: body.username,
-    },
-  });
-
-  if (existingUser) {
-    return new Response(JSON.stringify({ error: "User already exists" }), { status: 400 });
-  }
-
-  // Create a new user
   const user = await prisma.user.create({
     data: {
       email: body.username,
-      password: body.password, // Ensure to hash the password before saving it in production
-      // Add any additional registration fields here
+      name: body.name,
+      password: body.password, // Note: You should hash the password before storing it in the database.
     },
   });
 
-  return new Response(JSON.stringify({ success: true }));
+  if (user) {
+    const { password, ...noPassword } = user;
+    return new Response(JSON.stringify(noPassword));
+  }
+
+  return new Response(JSON.stringify(null));
 }

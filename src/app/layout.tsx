@@ -1,4 +1,3 @@
-import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -17,7 +16,41 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+      <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossOrigin="anonymous"
+        ></link>
+      </head>
+      <body className={inter.className}>
+        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+          <div className="container-fluid">            
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+              <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href="/">
+                    Home
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href="/signin">
+                    Sign In
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" aria-current="page" href="/register">
+                    Sign Up
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div className="container">{children}</div>
+      </body>
+      
     </html>
   )
 }
