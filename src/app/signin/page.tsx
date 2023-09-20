@@ -35,10 +35,12 @@ export default function Page() {
 
   return (
     <>
-      <h1>This is Signin Page</h1>
+      <h1>เข้าสู่ระบบ</h1>
       <form onSubmit={onSubmit}>
-      <div className="m-6 py-1">
-          <input
+      <div className="mb-3">
+          <label className="col-sm-2 col-form-label">Email</label>
+          <div className="col-sm-10">
+            <input
             required
             type="email"
             name="username"
@@ -47,8 +49,11 @@ export default function Page() {
             placeholder="Email address"
             className="form-control"
           />
+          </div>
         </div>
-        <div className="m-6 py-1">
+        <div className="mb-3">
+        <label className="col-sm-2 col-form-label">Password</label>
+          <div className="col-sm-10">
           <input
             required
             type="password"
@@ -58,9 +63,13 @@ export default function Page() {
             placeholder="Password"
             className="form-control"
           />
+          </div>
         </div>
-        <button type="submit">Sign in</button>
-      </form>
+        <button type="submit" className="btn btn-primary">Sign in</button>
+        </form>
+        <div className="dropdown-divider"></div>
+        <a className="dropdown-item" href="/signup">New around here? Sign up</a>
+        
     </>
   );
 }

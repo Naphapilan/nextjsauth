@@ -19,7 +19,7 @@ export default function Register() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    const resp = await fetch("http://localhost:3000/api/register", {
+    const resp = await fetch("http://localhost:3000/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,10 +42,12 @@ export default function Register() {
 
   return (
     <>
-      <h1>Register Page</h1>
+      <h1>ลงทะเบียน</h1>
       <form onSubmit={onSubmit}>
-        <div className="m-6 py-1">
-          <input
+        <div className="mb-3">
+          <label className="col-sm-2 col-form-label">Email</label>
+          <div className="col-sm-10">
+            <input
             required
             type="email"
             name="username"
@@ -54,8 +56,12 @@ export default function Register() {
             placeholder="Email address"
             className="form-control"
           />
+          </div>
+          
         </div>
-        <div className="m-6 py-1">
+        <div className="mb-3">
+          <label className="col-sm-2 col-form-label">Name</label>
+          <div className="col-sm-10">
           <input
             required
             type="name"
@@ -65,8 +71,11 @@ export default function Register() {
             placeholder="Name"
             className="form-control"
           />
+          </div>
         </div>
-        <div className="m-6 py-1">
+        <div className="mb-3">
+        <label className="col-sm-2 col-form-label">Password</label>
+          <div className="col-sm-10">
           <input
             required
             type="password"
@@ -76,8 +85,9 @@ export default function Register() {
             placeholder="Password"
             className="form-control"
           />
+          </div>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" className="btn btn-primary">Register</button>
       </form>
     </>
   );
