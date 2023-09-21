@@ -1,26 +1,23 @@
 import prisma from "@/lib/prisma";
+import * as bcrypt from "bcrypt";
 
 interface RequestBody {
   username: string;
-  name: string;
   password: string;
+  name: string;
 }
-
-export async function POST(req: Request) {
-  const body: RequestBody = await req.json();
+export async function POST(request: Request) {
+  const body: RequestBody = await request.json();
 
   const user = await prisma.user.create({
     data: {
-      email: body.username,
       name: body.name,
-      password: body.password, // Note: You should hash the password before storing it in the database.
+      email: body.username,
+      password: await bcrypt.hash(body.password, 10),
     },
   });
 
-  if (user) {
-    const { password, ...noPassword } = user;
-    return new Response(JSON.stringify(noPassword));
-  }
-
-  return new Response(JSON.stringify(null));
+  const { password, ...result } = user;
+  return new Response(JSON.stringify(result));
 }
+

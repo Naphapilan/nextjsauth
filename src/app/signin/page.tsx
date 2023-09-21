@@ -1,12 +1,13 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import { signIn } from "next-auth/react";
 
 export default function Page() {
   const router = useRouter();
   const [formValue, setFormValue] = useState({
     username: "",
-    password: "",
+    password: "1234",
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,18 +17,18 @@ export default function Page() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    //set data to API
-    const resp = await fetch("http://localhost:3000/api/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formValue),
+    //set data to NextAuth singIn()
+    const resp = await signIn("credentials", {
+      redirect: false,
+      username: formValue.username,
+      password: formValue.password,
+      callbackUrl: "/",
     });
 
-    if (resp.ok) {
+    if (resp?.ok) {
       router.push("/");
     } else {
+      //set error
       router.back();
     }
   };

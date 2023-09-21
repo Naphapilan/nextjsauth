@@ -1,21 +1,17 @@
 import prisma from "@/lib/prisma";
-
+import * as bcrypt from "bcrypt";
 interface RequestBody {
   username: string;
   password: string;
 }
-
 export async function POST(req: Request) {
   const body: RequestBody = await req.json();
-  //console.log(body);
-  //check with database
   const user = await prisma.user.findFirst({
     where: {
       email: body.username,
-      password: body.password, // Note: You should hash the password before storing it in the database.
     },
   });
-  if (user) {
+  if (user && (await bcrypt.compare(body.password, user.password))) {
     const { password, ...noPassword } = user;
     return new Response(JSON.stringify(noPassword));
   }
