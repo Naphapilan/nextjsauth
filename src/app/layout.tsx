@@ -29,7 +29,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Providers>
-          <nav className="navbar bg-body-tertiary">
+          <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
             <div className="container-fluid">
               <a className="navbar-brand">Navbar</a>
               <div className="d-flex">
