@@ -29,10 +29,11 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Providers>
-          <nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+          <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
               <a className="navbar-brand">Navbar</a>
               <div className="d-flex">
+                
                 <SigninButton />
               </div>
             </div>

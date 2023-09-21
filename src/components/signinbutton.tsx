@@ -11,12 +11,12 @@ const SigninButton = () => {
     return (
       <>
         <p>{session.user.name}</p>
-        <button className="btn btn-primary">SignOut</button>
+        <button className="btn btn-outline-secondary">SignOut</button>
       </>
     );
   return (
     <>
-      <button onClick={handleSignin} className="btn btn-primary">
+      <button onClick={handleSignin} className="btn btn-outline-secondary">
         SignIn
       </button>
     </>
